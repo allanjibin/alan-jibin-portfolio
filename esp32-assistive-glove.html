@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistive Glove for Mute Communication | Alan Jibin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: { black: '#0f0f0f', white: '#fcfcfc', }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: #fcfcfc;
+            -webkit-font-smoothing: antialiased;
+        }
+        .hover-underline:hover { text-decoration: underline; text-underline-offset: 4px; }
+    </style>
+</head>
+<body class="antialiased font-sans selection:bg-white selection:text-black">
+
+    <div class="w-full">
+
+        <nav class="flex justify-between items-center px-6 py-8 md:px-12 border-b border-white/20 bg-[#0f0f0f] relative z-50">
+            <a href="index.html" class="text-xl font-bold tracking-tight text-white hover-underline">&larr; Alan Jibin.</a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-white">
+                <a href="index.html" class="hover-underline">Home.</a>
+                <a href="index.html" class="hover-underline">Projects.</a>
+                <a href="#" class="hover-underline">About.</a>
+                <a href="#" class="hover-underline">Blog.</a>
+            </div>
+            <a href="index.html" class="md:hidden text-sm font-medium hover-underline text-white">Back.</a>
+        </nav>
+
+        <header class="py-20 px-6 md:px-12 max-w-5xl mx-auto text-center mt-10">
+            <div class="inline-flex items-center gap-3 mb-8">
+                <span class="bg-white/10 border border-white/20 text-white px-4 py-1.5 rounded-full text-sm font-medium">C / C++</span>
+                <span class="bg-white/10 border border-white/20 text-white px-4 py-1.5 rounded-full text-sm font-medium">ESP32</span>
+                <span class="bg-white/10 border border-white/20 text-white px-4 py-1.5 rounded-full text-sm font-medium">Embedded Systems</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-tight mb-6 text-white">Assistive Glove for Mute Communication.</h1>
+            <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                A wearable IoT solution designed to translate hand gestures into audible speech and text using flex sensors and IMU data.
+            </p>
+        </header>
+
+       <section class="px-6 md:px-12 max-w-6xl mx-auto mb-20">
+            <div class="w-full aspect-video bg-white/5 border border-white/10 rounded-[40px] flex items-center justify-center overflow-hidden">
+                <img src="assets/WhatsApp Image 2026-04-14 at 14.59.37.jpeg" alt="ESP32 Assistive Glove Prototype" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
+            </div>
+        </section>
+
+        <main class="px-6 md:px-12 max-w-3xl mx-auto space-y-16 pb-32 text-lg text-gray-300 leading-relaxed">
+            
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight text-white mb-6">The Challenge.</h2>
+                <p class="mb-4">
+                    Communication barriers significantly impact the daily lives of individuals with speech and hearing impairments. While sign language is highly expressive, it relies on the recipient also understanding the language, which is often not the case in public or emergency settings.
+                </p>
+                <p>
+                    This project aims to bridge that gap by creating a portable, wearable device capable of reading physical hand gestures and translating them into standard text and audible speech in real-time.
+                </p>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight text-white mb-6">Hardware & Architecture.</h2>
+                <p class="mb-4">
+                    The system relies on a combination of analog and digital sensors processed by a powerful microcontroller to recognize complex hand movements.
+                </p>
+                <ul class="list-disc list-inside space-y-3 mt-4 text-gray-400 marker:text-white">
+                    <li><strong class="text-white">Sensory Input:</strong> Flex sensors are attached to individual fingers to measure the degree of bending. An IMU (Inertial Measurement Unit) tracks the overall orientation, acceleration, and tilt of the hand in 3D space.</li>
+                    <li><strong class="text-white">Microcontroller (ESP32):</strong> Chosen for its processing speed and built-in wireless capabilities. It reads the analog values from the flex sensors and the I2C data from the IMU.</li>
+                    <li><strong class="text-white">Translation Logic:</strong> Written in C/C++, the embedded code maps specific combinations of sensor thresholds (e.g., index finger bent, hand tilted forward) to predefined characters or words.</li>
+                </ul>
+            </div>
+
+            <div class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10">
+                <h2 class="text-2xl font-bold tracking-tight text-white mb-4">Development & Calibration.</h2>
+                <p class="text-gray-400 text-base">
+                    A major focus of the development involves debouncing sensor inputs and fine-tuning the resistance thresholds to ensure accurate gesture recognition without false positives. The ESP32's connectivity also allows for future expansion, such as transmitting the translated text directly to a paired smartphone app via Bluetooth.
+                </p>
+            </div>
+
+        </main>
+        
+        <footer class="py-12 border-t border-white/20 text-center text-sm text-gray-400">
+            <p>Copyright 2026. Alan Jibin. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>

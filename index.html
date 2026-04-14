@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alan Jibin. | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: { black: '#0f0f0f', white: '#fcfcfc', },
+                    boxShadow: { 'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.5)', }
+                }
+            }
+        }
+    </script>
+    <style>
+        body, a, button {
+            cursor: none !important; 
+            background-color: #0f0f0f;
+            color: #fcfcfc;
+            overflow-x: hidden; 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .hover-underline:hover { text-decoration: underline; text-underline-offset: 4px; }
+        
+        spline-viewer {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            cursor: grab !important; 
+        }
+        
+        .dotted-text {
+            color: transparent;
+            background-image: radial-gradient(circle, #4b5563 35%, transparent 40%);
+            background-size: 14px 14px; 
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        #preloader { transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out; }
+        .hide-preloader { opacity: 0; visibility: hidden; }
+        .loader-line { width: 0%; animation: fillLine 1.5s ease-in-out infinite alternate; }
+        @keyframes fillLine { 0% { width: 0%; } 100% { width: 100%; } }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.active { opacity: 1; transform: translateY(0); }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+        .delay-500 { transition-delay: 500ms; }
+
+        .cursor-dot {
+            width: 8px; height: 8px;
+            background-color: white;
+            position: fixed; top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 99999;
+            pointer-events: none;
+        }
+        .cursor-outline {
+            width: 40px; height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            position: fixed; top: 0; left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 99998;
+            pointer-events: none;
+            transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
+        }
+
+        .meteor-trail {
+            pointer-events: none;
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background-color: #8b9aff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #8b9aff, 0 0 20px #8b9aff;
+            z-index: 99997;
+            animation: meteorFade 0.6s ease-out forwards;
+        }
+
+        @keyframes meteorFade {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, 20px) scale(0); }
+        }
+
+        @keyframes spinSlowly {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .spin-continuous {
+            animation: spinSlowly 30s linear infinite;
+        }
+
+        @media (max-width: 768px) {
+            .cursor-dot, .cursor-outline, .meteor-trail { display: none !important; }
+            body, a, button { cursor: auto !important; }
+        }
+    </style>
+</head>
+<body class="antialiased font-sans selection:bg-white selection:text-black">
+
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <div id="preloader" class="fixed inset-0 z-[100] bg-[#0f0f0f] flex flex-col items-center justify-center cursor-none">
+        <h2 class="dotted-text text-4xl md:text-5xl font-black tracking-tighter lowercase mb-6 animate-pulse">alan jibin.</h2>
+        <div class="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
+            <div class="h-full bg-[#8b9aff] loader-line rounded-full"></div>
+        </div>
+    </div>
+
+    <div class="w-full">
+
+        <nav class="reveal-up flex justify-between items-center px-6 py-8 md:px-12 border-b border-white/20 bg-[#0f0f0f] relative z-50">
+            <a href="index.html" class="text-xl font-bold tracking-tight text-white hover:text-[#8b9aff] transition-colors cursor-hover-target">Alan Jibin.</a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-white">
+                <a href="index.html" class="font-bold border-b-2 border-[#8b9aff] pb-1 cursor-hover-target">Home.</a>
+                <a href="projects.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">Projects.</a>
+                <a href="about.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">About.</a>
+                <a href="blog.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">Blog.</a>
+            </div>
+            <a href="#" class="md:hidden text-sm font-medium hover-underline text-white cursor-hover-target">Menu.</a>
+        </nav>
+
+        <header class="relative w-full h-[75vh] md:h-[85vh] flex items-center justify-center border-b border-white/20 overflow-hidden bg-[#0f0f0f]">
+            
+            <div class="reveal-up delay-100 absolute z-0 w-full text-center pointer-events-none flex flex-col items-center justify-center">
+                <h1 data-parallax="-0.015" class="dotted-text text-[20vw] md:text-[15vw] leading-none font-black tracking-tighter lowercase opacity-100 will-change-transform">
+                    make <br> money <br> first
+                </h1>
+            </div>
+            
+            <div class="reveal-up delay-200 absolute inset-0 z-10 w-full h-full flex justify-center items-center">
+                <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.69/build/spline-viewer.js"></script>
+                <spline-viewer url="https://prod.spline.design/Xgojarfbf4I6O5Tj/scene.splinecode" class="spin-continuous"></spline-viewer>
+            </div>
+            
+            <div class="reveal-up delay-300 absolute z-20 top-1/4 left-10 md:left-1/4 transform md:-translate-x-1/2 pointer-events-none hidden sm:block">
+                <div data-parallax="0.04" class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-sm text-sm font-medium flex items-center gap-2 text-white will-change-transform">
+                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div> Deep Learning
+                </div>
+            </div>
+            <div class="reveal-up delay-400 absolute z-20 bottom-1/4 left-4 md:left-1/3 transform md:-translate-x-1/2 pointer-events-none hidden sm:block">
+                <div data-parallax="0.06" class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-sm text-sm font-medium flex items-center gap-2 text-white will-change-transform">
+                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div> Python & C
+                </div>
+            </div>
+            <div class="reveal-up delay-500 absolute z-20 top-1/3 right-10 md:right-1/4 transform md:translate-x-1/4 pointer-events-none hidden sm:block">
+                <div data-parallax="0.03" class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-sm text-sm font-medium flex items-center gap-2 text-white will-change-transform">
+                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div> Computer Vision
+                </div>
+            </div>
+            <div class="reveal-up delay-300 absolute z-20 bottom-1/3 right-4 md:right-1/3 transform md:translate-x-1/4 pointer-events-none hidden sm:block">
+                <div data-parallax="0.05" class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20 shadow-sm text-sm font-medium flex items-center gap-2 text-white will-change-transform">
+                    <div class="w-1.5 h-1.5 bg-white rounded-full"></div> Embedded Systems
+                </div>
+            </div>
+
+        </header>
+
+        <main class="space-y-12 py-20 px-6 md:px-12 max-w-7xl mx-auto border-b border-white/20">
+            
+            <article class="reveal-up bg-white/5 backdrop-blur-xl rounded-[40px] shadow-glass border border-white/10 group transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:bg-white/10 hover:border-white/30 cursor-hover-target">
+                <a href="#" class="flex flex-col md:flex-row items-center p-8 md:p-12 gap-10">
+                    <div class="w-full md:w-2/5 h-64 bg-gray-800 border border-gray-700 rounded-2xl flex items-center justify-center overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="assets/WhatsApp Image 2026-04-14 at 14.58.34.jpeg" alt="Metal Defect Detection" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 space-y-4">
+                        <h2 class="text-4xl md:text-5xl font-black tracking-tighter leading-tight text-white group-hover:text-[#8b9aff] transition-colors">Automated Metal Defect Detection.</h2>
+                        <p class="text-lg text-gray-400 max-w-2xl leading-relaxed group-hover:text-gray-200 transition-colors">A deep learning approach using camera vision and YOLO architecture to identify manufacturing flaws in real-time.</p>
+                    </div>
+                    <div class="w-full md:w-auto text-right space-y-2 mt-6 md:mt-0">
+                        <p class="bg-white/10 text-white border border-white/20 px-4 py-1.5 inline-block rounded-full text-sm font-medium tracking-tight">Python / Deep Learning</p>
+                        <p class="text-white font-bold group-hover:text-[#8b9aff] group-hover:translate-x-1 transition-all">Read more &rarr;</p>
+                    </div>
+                </a>
+            </article>
+
+            <article class="reveal-up bg-white/5 backdrop-blur-xl rounded-[40px] shadow-glass border border-white/10 group transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:bg-white/10 hover:border-white/30 cursor-hover-target">
+                <a href="#" class="flex flex-col md:flex-row items-center p-8 md:p-12 gap-10">
+                    <div class="w-full md:w-2/5 h-64 bg-gray-800 border border-gray-700 rounded-2xl flex items-center justify-center overflow-hidden grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="assets/WhatsApp Image 2026-04-14 at 14.59.37.jpeg" alt="Assistive Glove Prototype" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 space-y-4">
+                        <h2 class="text-4xl md:text-5xl font-black tracking-tighter leading-tight text-white group-hover:text-[#8b9aff] transition-colors">Assistive Glove for Mute Communication.</h2>
+                        <p class="text-lg text-gray-400 max-w-2xl leading-relaxed group-hover:text-gray-200 transition-colors">Translating hand gestures into text and speech using flex sensors, IMUs, and an ESP32 microcontroller.</p>
+                    </div>
+                    <div class="w-full md:w-auto text-right space-y-2 mt-6 md:mt-0">
+                        <p class="bg-white/10 text-white border border-white/20 px-4 py-1.5 inline-block rounded-full text-sm font-medium tracking-tight">C / Embedded Systems</p>
+                        <p class="text-white font-bold group-hover:text-[#8b9aff] group-hover:translate-x-1 transition-all">Read more &rarr;</p>
+                    </div>
+                </a>
+            </article>
+
+        </main>
+
+        <section class="py-20 px-6 md:px-12 max-w-7xl mx-auto">
+            <h2 class="reveal-up text-5xl font-black tracking-tighter mb-12 text-center text-white">Certifications & Experience.</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <article class="reveal-up bg-white/5 backdrop-blur-xl rounded-[40px] shadow-glass border border-white/10 group transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:bg-white/10 hover:border-white/30 p-8 flex flex-col h-full cursor-hover-target">
+                    <div class="w-full aspect-[4/3] bg-gray-800 border border-gray-700 rounded-2xl overflow-hidden mb-8">
+                        <img src="assets/ict-cert.jpg" alt="ICT Academy Internship Certificate" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <div class="flex-1 space-y-4">
+                        <h3 class="text-3xl font-bold tracking-tight text-white group-hover:text-[#8b9aff] transition-colors">Full Stack Development (MERN).</h3>
+                        <p class="text-lg text-gray-400 leading-relaxed group-hover:text-gray-200 transition-colors">
+                            A one-month intensive internship with the ICT Academy of Kerala focusing on building scalable web applications using MongoDB, Express, React, and Node.js.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex justify-between items-center border-t border-white/10 group-hover:border-white/30 pt-4 transition-colors">
+                        <span class="text-sm font-bold text-gray-400 group-hover:text-gray-200 transition-colors">July 2025</span>
+                        <span class="bg-white/10 text-white border border-white/20 px-3 py-1 rounded-full text-xs font-medium tracking-tight">Internship</span>
+                    </div>
+                </article>
+
+                <article class="reveal-up delay-100 bg-white/5 backdrop-blur-xl rounded-[40px] shadow-glass border border-white/10 group transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:bg-white/10 hover:border-white/30 p-8 flex flex-col h-full cursor-hover-target">
+                    <div class="w-full aspect-[4/3] bg-gray-800 border border-gray-700 rounded-2xl overflow-hidden mb-8">
+                        <img src="assets/isc2-cert.jpg" alt="ISC2 Certificate of Completion" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <div class="flex-1 space-y-4">
+                        <h3 class="text-3xl font-bold tracking-tight text-white group-hover:text-[#8b9aff] transition-colors">ISC2 Certificate of Completion.</h3>
+                        <p class="text-lg text-gray-400 leading-relaxed group-hover:text-gray-200 transition-colors">
+                            Successfully completed the final assessment validating fundamental cybersecurity principles, demonstrating a commitment to industry-standard security practices.
+                        </p>
+                    </div>
+                    <div class="mt-6 flex justify-between items-center border-t border-white/10 group-hover:border-white/30 pt-4 transition-colors">
+                        <span class="text-sm font-bold text-gray-400 group-hover:text-gray-200 transition-colors">August 2024</span>
+                        <span class="bg-white/10 text-white border border-white/20 px-3 py-1 rounded-full text-xs font-medium tracking-tight">Certification</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+        
+        <footer class="py-12 border-t border-white/20 text-center text-sm text-gray-400">
+            <p>Copyright 2026. Alan Jibin. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const cursorDot = document.querySelector("[data-cursor-dot]");
+        const cursorOutline = document.querySelector("[data-cursor-outline]");
+        const hoverTargets = document.querySelectorAll("a, .cursor-hover-target");
+
+        let mouseX = 0;
+        let mouseY = 0;
+
+        window.addEventListener("mousemove", function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+
+            cursorDot.style.left = `${mouseX}px`;
+            cursorDot.style.top = `${mouseY}px`;
+
+            cursorOutline.animate({
+                left: `${mouseX}px`,
+                top: `${mouseY}px`
+            }, { duration: 500, fill: "forwards" });
+
+            const spark = document.createElement("div");
+            spark.className = "meteor-trail";
+            spark.style.left = `${mouseX}px`;
+            spark.style.top = `${mouseY}px`;
+            document.body.appendChild(spark);
+
+            setTimeout(() => { spark.remove(); }, 600);
+        });
+
+        hoverTargets.forEach(target => {
+            target.addEventListener("mouseenter", () => {
+                cursorOutline.style.width = "60px";
+                cursorOutline.style.height = "60px";
+                cursorOutline.style.backgroundColor = "rgba(139, 154, 255, 0.2)";
+                cursorOutline.style.borderColor = "#8b9aff";
+            });
+            target.addEventListener("mouseleave", () => {
+                cursorOutline.style.width = "40px";
+                cursorOutline.style.height = "40px";
+                cursorOutline.style.backgroundColor = "transparent";
+                cursorOutline.style.borderColor = "rgba(255, 255, 255, 0.5)";
+            });
+        });
+
+        const parallaxElements = document.querySelectorAll('[data-parallax]');
+        let currentX = 0;
+        let currentY = 0;
+
+        function animateParallax() {
+            const targetX = mouseX - window.innerWidth / 2;
+            const targetY = mouseY - window.innerHeight / 2;
+            currentX += (targetX - currentX) * 0.05;
+            currentY += (targetY - currentY) * 0.05;
+
+            parallaxElements.forEach(el => {
+                const speed = parseFloat(el.getAttribute('data-parallax'));
+                const x = currentX * speed;
+                const y = currentY * speed;
+                el.style.transform = `translate(${x}px, ${y}px)`;
+            });
+            requestAnimationFrame(animateParallax);
+        }
+        animateParallax();
+
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('preloader').classList.add('hide-preloader');
+                setTimeout(() => {
+                    const heroElements = document.querySelectorAll('nav.reveal-up, header .reveal-up');
+                    heroElements.forEach(el => el.classList.add('active'));
+                }, 200); 
+            }, 600);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('main .reveal-up, section .reveal-up, section h2.reveal-up').forEach((el) => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
