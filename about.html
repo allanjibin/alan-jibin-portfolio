@@ -94,63 +94,100 @@
         }
     </style>
 </head>
-<body class="antialiased font-sans selection:bg-white selection:text-black flex flex-col min-h-screen">
+<body class="antialiased font-sans selection:bg-white selection:text-black">
 
     <div class="cursor-dot" data-cursor-dot></div>
     <div class="cursor-outline" data-cursor-outline></div>
 
     <div id="preloader" class="fixed inset-0 z-[100] bg-[#0f0f0f] flex flex-col items-center justify-center cursor-none">
-        <h2 class="dotted-text text-4xl md:text-5xl font-black tracking-tighter lowercase mb-6 animate-pulse">updating.</h2>
+        <h2 class="dotted-text text-4xl md:text-5xl font-black tracking-tighter lowercase mb-6 animate-pulse">alan jibin.</h2>
         <div class="w-48 h-1 bg-white/10 rounded-full overflow-hidden">
             <div class="h-full bg-[#8b9aff] loader-line rounded-full"></div>
         </div>
     </div>
 
-    <div class="w-full flex-grow flex flex-col">
+    <div class="w-full">
 
         <nav class="reveal-up flex justify-between items-center px-6 py-8 md:px-12 border-b border-white/20 bg-[#0f0f0f] relative z-50">
             <a href="index.html" class="text-xl font-bold tracking-tight text-white hover:text-[#8b9aff] transition-colors cursor-hover-target">Alan Jibin.</a>
+            
             <div class="hidden md:flex space-x-8 text-sm font-medium text-white">
                 <a href="index.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">Home.</a>
                 <a href="projects.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">Projects.</a>
                 <a href="about.html" class="font-bold border-b-2 border-[#8b9aff] pb-1 cursor-hover-target">About.</a>
                 <a href="blog.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">Blog.</a>
             </div>
-            <a href="#" class="md:hidden text-sm font-medium hover-underline text-white cursor-hover-target">Menu.</a>
+            
+            <a href="#" id="mobile-menu-btn" class="md:hidden text-sm font-medium hover-underline text-white cursor-hover-target">Menu.</a>
         </nav>
 
-        <main class="relative w-full flex-grow bg-[#0f0f0f] overflow-hidden flex flex-col items-center justify-center border-b border-white/20">
-            
-            <div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-20">
-                <h1 class="dotted-text text-[40vw] md:text-[30vw] leading-none font-black tracking-tighter lowercase">
-                    404
+        <div id="mobile-menu" class="fixed inset-0 bg-[#0f0f0f]/95 backdrop-blur-lg z-[100] flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-500">
+            <button id="close-menu-btn" class="absolute top-8 right-8 text-sm font-medium text-white hover:text-[#8b9aff] cursor-hover-target">Close.</button>
+            <div class="flex flex-col space-y-8 text-4xl font-black tracking-tighter text-center">
+                <a href="index.html" class="text-white hover:text-[#8b9aff] transition-colors">Home.</a>
+                <a href="projects.html" class="text-white hover:text-[#8b9aff] transition-colors">Projects.</a>
+                <a href="about.html" class="text-[#8b9aff] transition-colors">About.</a>
+                <a href="blog.html" class="text-white hover:text-[#8b9aff] transition-colors">Blog.</a>
+            </div>
+        </div>
+
+        <header class="py-24 px-6 md:px-12 max-w-5xl mx-auto text-center relative overflow-hidden">
+            <div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-40">
+                <h1 class="dotted-text text-[20vw] leading-none font-black tracking-tighter lowercase">
+                    about
                 </h1>
             </div>
-            
-            <div class="relative z-10 reveal-up delay-100 flex flex-col items-center text-center px-6 py-20">
-                <div class="w-16 h-1 bg-[#8b9aff] mb-8 rounded-full"></div>
-                <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-tight mb-6 text-white">Under Maintenance.</h1>
-                <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed mb-12">
-                    I'm currently writing my bio and setting up this section. Check back soon to learn more about my journey!
+            <div class="relative z-10 reveal-up delay-100 flex flex-col items-center">
+                <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-tight mb-6 text-white">Alan Jibin.</h1>
+                <p class="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    Electronics & Computer Engineering. Specializing in computer vision, deep learning, and cloud computing.
                 </p>
-                <a href="index.html" class="bg-white/5 backdrop-blur-md text-white border border-white/20 hover:bg-[#8b9aff] hover:border-[#8b9aff] hover:text-black px-8 py-4 rounded-full font-bold tracking-tight transition-all duration-300 cursor-hover-target shadow-glass group">
-                    <span class="group-hover:-translate-x-1 inline-block transition-transform">&larr;</span> Return to Homepage
-                </a>
             </div>
+        </header>
 
+        <main class="py-12 px-6 md:px-12 max-w-4xl mx-auto border-t border-white/20">
+            <article class="reveal-up space-y-8 text-lg text-gray-400 leading-relaxed">
+                <p>
+                    I am currently pursuing my B.Tech in Electronics and Computer Engineering at St. Joseph's College of Engineering and Technology, Palai. I serve as an Executive Committee Member for the Department of ECE (2026-2027), focusing on bridging the gap between hardware systems and intelligent software.
+                </p>
+                <p>
+                    My technical focus lies heavily in <span class="text-white font-medium">Computer Vision</span> and <span class="text-white font-medium">Artificial Intelligence</span>. Through projects utilizing YOLOv8 and OpenCV, I design real-time systems that solve physical, industrial challenges—such as automated surface defect identification. 
+                </p>
+                <p>
+                    Alongside deep learning, I have a strong background in <span class="text-white font-medium">Embedded Systems</span>, regularly interfacing microcontrollers like the ESP32 and Arduino with physical sensors. I am also actively expanding my expertise into Cloud Computing and Information Security, preparing for the AWS Foundation certification and exploring the GRC sector.
+                </p>
+            </article>
+
+            <div class="reveal-up mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="bg-white/5 border border-white/10 p-6 rounded-2xl shadow-glass">
+                    <h3 class="text-white font-bold mb-2">Languages</h3>
+                    <p class="text-sm text-gray-400">Python, C/C++</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-6 rounded-2xl shadow-glass">
+                    <h3 class="text-white font-bold mb-2">AI / ML</h3>
+                    <p class="text-sm text-gray-400">YOLOv8, OpenCV</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-6 rounded-2xl shadow-glass">
+                    <h3 class="text-white font-bold mb-2">Hardware</h3>
+                    <p class="text-sm text-gray-400">ESP32, Arduino</p>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-6 rounded-2xl shadow-glass">
+                    <h3 class="text-white font-bold mb-2">Tools</h3>
+                    <p class="text-sm text-gray-400">Git, LaTeX, AWS</p>
+                </div>
+            </div>
         </main>
 
-        <footer class="py-12 text-center text-sm text-gray-400 bg-[#0f0f0f]">
+        <footer class="py-12 mt-12 border-t border-white/10 text-center text-sm text-gray-400 bg-[#0f0f0f]">
             <p>Copyright 2026. Alan Jibin. All rights reserved.</p>
         </footer>
 
     </div>
 
     <script>
-        // Handle Custom Cursor & Meteor Trail
         const cursorDot = document.querySelector("[data-cursor-dot]");
         const cursorOutline = document.querySelector("[data-cursor-outline]");
-        const hoverTargets = document.querySelectorAll("a, .cursor-hover-target");
+        const hoverTargets = document.querySelectorAll("a, button, .cursor-hover-target");
 
         let mouseX = 0;
         let mouseY = 0;
@@ -173,9 +210,7 @@
             spark.style.top = `${mouseY}px`;
             document.body.appendChild(spark);
 
-            setTimeout(() => {
-                spark.remove();
-            }, 600);
+            setTimeout(() => { spark.remove(); }, 600);
         });
 
         hoverTargets.forEach(target => {
@@ -193,7 +228,6 @@
             });
         });
 
-        // Handle the Loader and Initial Reveal
         window.addEventListener('load', function() {
             setTimeout(function() {
                 document.getElementById('preloader').classList.add('hide-preloader');
@@ -203,6 +237,33 @@
                 }, 200); 
             }, 600);
         });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); 
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('main .reveal-up').forEach((el) => {
+            observer.observe(el);
+        });
+
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if(mobileMenuBtn && closeMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+            });
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+            });
+        }
     </script>
 
 </body>
