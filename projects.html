@@ -113,11 +113,21 @@
             <div class="hidden md:flex space-x-8 text-sm font-medium text-white">
                 <a href="index.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">Home.</a>
                 <a href="projects.html" class="font-bold border-b-2 border-[#8b9aff] pb-1 cursor-hover-target">Projects.</a>
-                <a href="#" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">About.</a>
+                <a href="about.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">About.</a>
                 <a href="blog.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">Blog.</a>
             </div>
-            <a href="#" class="md:hidden text-sm font-medium hover-underline text-white cursor-hover-target">Menu.</a>
+            <a href="#" id="mobile-menu-btn" class="md:hidden text-sm font-medium hover-underline text-white cursor-hover-target">Menu.</a>
         </nav>
+
+        <div id="mobile-menu" class="fixed inset-0 bg-[#0f0f0f]/95 backdrop-blur-lg z-[100] flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-500">
+            <button id="close-menu-btn" class="absolute top-8 right-8 text-sm font-medium text-white hover:text-[#8b9aff] cursor-hover-target">Close.</button>
+            <div class="flex flex-col space-y-8 text-4xl font-black tracking-tighter text-center">
+                <a href="index.html" class="text-white hover:text-[#8b9aff] transition-colors">Home.</a>
+                <a href="projects.html" class="text-[#8b9aff] transition-colors">Projects.</a>
+                <a href="about.html" class="text-white hover:text-[#8b9aff] transition-colors">About.</a>
+                <a href="blog.html" class="text-white hover:text-[#8b9aff] transition-colors">Blog.</a>
+            </div>
+        </div>
 
         <header class="py-24 px-6 md:px-12 max-w-5xl mx-auto text-center relative overflow-hidden">
             <div class="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-40">
@@ -274,6 +284,21 @@
         document.querySelectorAll('main .reveal-up').forEach((el) => {
             observer.observe(el);
         });
+
+        // Mobile Menu Toggle Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if(mobileMenuBtn && closeMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+            });
+            closeMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+            });
+        }
     </script>
 
 </body>
