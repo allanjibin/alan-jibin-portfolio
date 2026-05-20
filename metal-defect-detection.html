@@ -19,80 +19,25 @@
         }
     </script>
     <style>
-        body, a, button {
-            cursor: none !important; 
-            background-color: #0f0f0f;
-            color: #fcfcfc;
-            overflow-x: hidden; 
-            -webkit-font-smoothing: antialiased;
-        }
-
+        body, a, button { cursor: none !important; background-color: #0f0f0f; color: #fcfcfc; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
         .hover-underline:hover { text-decoration: underline; text-underline-offset: 4px; }
-        
-        .dotted-bg {
-            background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 24px 24px;
-        }
-
+        .dotted-bg { background-image: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 24px 24px; }
         #preloader { transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out; }
         .hide-preloader { opacity: 0; visibility: hidden; }
         .loader-line { width: 0%; animation: fillLine 1.5s ease-in-out infinite alternate; }
         @keyframes fillLine { 0% { width: 0%; } 100% { width: 100%; } }
-
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .reveal-up { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal-up.active { opacity: 1; transform: translateY(0); }
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
-
-        .cursor-dot {
-            width: 8px; height: 8px;
-            background-color: white;
-            position: fixed; top: 0; left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 99999;
-            pointer-events: none;
-        }
-        .cursor-outline {
-            width: 40px; height: 40px;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            position: fixed; top: 0; left: 0;
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-            z-index: 99998;
-            pointer-events: none;
-            transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
-        }
-
-        .meteor-trail {
-            pointer-events: none;
-            position: fixed;
-            width: 6px;
-            height: 6px;
-            background-color: #8b9aff;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #8b9aff, 0 0 20px #8b9aff;
-            z-index: 99997;
-            animation: meteorFade 0.6s ease-out forwards;
-        }
-
-        @keyframes meteorFade {
-            0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, 20px) scale(0); }
-        }
-
-        @media (max-width: 768px) {
-            .cursor-dot, .cursor-outline, .meteor-trail { display: none !important; }
-            body, a, button { cursor: auto !important; }
-        }
+        .cursor-dot { width: 8px; height: 8px; background-color: white; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(255, 255, 255, 0.5); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99998; pointer-events: none; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
+        .meteor-trail { pointer-events: none; position: fixed; width: 6px; height: 6px; background-color: #8b9aff; border-radius: 50%; box-shadow: 0 0 10px #8b9aff, 0 0 20px #8b9aff; z-index: 99997; animation: meteorFade 0.6s ease-out forwards; }
+        @keyframes meteorFade { 0% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, 20px) scale(0); } }
+        @media (max-width: 768px) { .cursor-dot, .cursor-outline, .meteor-trail { display: none !important; } body, a, button { cursor: auto !important; } }
     </style>
 </head>
 <body class="antialiased font-sans selection:bg-white selection:text-black dotted-bg">
-
     <div class="cursor-dot" data-cursor-dot></div>
     <div class="cursor-outline" data-cursor-outline></div>
 
@@ -104,14 +49,11 @@
     </div>
 
     <div class="w-full">
-
         <nav class="reveal-up flex justify-between items-center px-6 py-8 md:px-12 border-b border-white/20 bg-[#0f0f0f]/80 backdrop-blur-md sticky top-0 z-50">
             <a href="index.html" class="text-xl font-bold tracking-tight text-white hover:text-[#8b9aff] transition-colors cursor-hover-target">&larr; Back</a>
             <div class="hidden md:flex space-x-8 text-sm font-medium text-white">
                 <a href="index.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">Home.</a>
                 <a href="projects.html" class="font-bold border-b-2 border-[#8b9aff] pb-1 cursor-hover-target">Projects.</a>
-                <a href="about.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">About.</a>
-                <a href="blog.html" class="hover-underline text-gray-400 hover:text-white cursor-hover-target">Blog.</a>
             </div>
             <a href="#" id="mobile-menu-btn" class="md:hidden text-sm font-medium hover-underline text-white cursor-hover-target">Menu.</a>
         </nav>
@@ -119,76 +61,84 @@
         <header class="pt-24 pb-12 px-6 md:px-12 max-w-5xl mx-auto">
             <div class="reveal-up flex items-center gap-3 mb-6">
                 <span class="w-12 h-[2px] bg-[#8b9aff]"></span>
-                <span class="text-[#8b9aff] font-bold tracking-widest text-xs uppercase">Case Study / 2026</span>
+                <span class="text-[#8b9aff] font-bold tracking-widest text-xs uppercase">Thesis / Miniproject 2026</span>
             </div>
-            <h1 class="reveal-up delay-100 text-5xl md:text-7xl font-black tracking-tighter leading-tight mb-8 text-white">
-                Real-Time Automated Crack Detection System.
-            </h1>
+            <h1 class="reveal-up delay-100 text-5xl md:text-7xl font-black tracking-tighter leading-tight mb-8 text-white">Real-Time Automatic Crack Detection System for Interlocked Metal Chains.</h1>
+            <p class="reveal-up delay-200 text-xl text-gray-400 max-w-2xl leading-relaxed">Addressing the critical industrial challenge of reliable, efficient surface defect detection in mechanical systems using automated image processing[cite: 83].</p>
         </header>
-
-        <div class="reveal-up px-6 md:px-12 max-w-7xl mx-auto mb-20">
-            <div class="w-full aspect-video md:aspect-[21/9] bg-[#f8f9fa] rounded-[32px] overflow-hidden border border-white/10 shadow-2xl relative flex items-center justify-center">
-                <img src="assets/project-sketch.jpeg" alt="Project Setup Sketch" class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-500 mix-blend-multiply">
-            </div>
-        </div>
 
         <main class="space-y-24 pb-24 px-6 md:px-12 max-w-4xl mx-auto">
             
             <section class="reveal-up space-y-6">
-                <h2 class="text-3xl font-black tracking-tight text-white">The Problem</h2>
+                <h2 class="text-3xl font-black tracking-tight text-white">Abstract & Motivation</h2>
                 <p class="text-lg text-gray-400 leading-relaxed">
-                    Industrial metal chains are critical components in manufacturing. Operating under continuous stress, they are vulnerable to surface cracking. Manual inspection is time-consuming, prone to error, and often misses micro-cracks on high-speed lines.
-                </p>
-                <p class="text-lg text-gray-400 leading-relaxed">
-                    The objective was to design a non-contact, automated vision system capable of inspecting interlocked metal chains in real-time to prevent catastrophic failure.
+                    Industrial metal chains are highly susceptible to surface cracks due to continuous stress, wear, and environmental factors. Traditional manual inspection is inefficient, prone to human fatigue, and unreliable in high-speed production settings[cite: 52, 55]. This system introduces a non-contact, automated approach using computer vision to detect surface defects, ensuring industrial safety and reducing costly downtime[cite: 59, 61].
                 </p>
             </section>
 
             <section class="reveal-up space-y-8 pt-8 border-t border-white/10">
-                <h2 class="text-3xl font-black tracking-tight text-white">Architecture & Hardware</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white/5 border border-white/10 p-6 rounded-3xl shadow-glass flex flex-col"><img src="assets/block-diagram.png" class="rounded-lg"></div>
-                    <div class="bg-white/5 border border-white/10 p-6 rounded-3xl shadow-glass flex flex-col"><img src="assets/flowchart.png" class="rounded-lg"></div>
+                <h2 class="text-3xl font-black tracking-tight text-white">System Design & Logic</h2>
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl shadow-glass flex flex-col items-center">
+                    <h3 class="text-xl font-bold text-white mb-6">Hardware Block Diagram</h3>
+                    <img src="assets/block-diagram.png" alt="System Block Diagram" class="rounded-xl border border-white/10">
+                    <p class="text-gray-400 mt-6 text-sm leading-relaxed">The architecture integrates data acquisition (motor, conveyor, camera, lighting) with a processing unit (Python/OpenCV/YOLOv8) to drive output interfaces, including visual defect overlays, audible alerts, and conveyor stop signals[cite: 481, 482].</p>
                 </div>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
-                    <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/camera.jpeg" class="rounded-lg mb-2"> <p class="text-xs text-center font-bold">Arducam 5MP</p></div>
-                    <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/motor.jpeg" class="rounded-lg mb-2"> <p class="text-xs text-center font-bold">Geared Motor</p></div>
-                    <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/regulat.jpeg" class="rounded-lg mb-2"> <p class="text-xs text-center font-bold">PWM Control</p></div>
-                    <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/converter.jpeg" class="rounded-lg mb-2"> <p class="text-xs text-center font-bold">12V SMPS</p></div>
+                
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl shadow-glass flex flex-col items-center">
+                    <h3 class="text-xl font-bold text-white mb-6">Firmware Flowchart</h3>
+                    <img src="assets/flowchart.png" alt="System Flowchart" class="rounded-xl border border-white/10">
+                    <p class="text-gray-400 mt-6 text-sm leading-relaxed">The system initializes the YOLOv8 model and camera, then enters a continuous scan loop. AI inference occurs at a confidence threshold of 0.15; if cracks are detected, the system updates the safety status, increments the defect counter, and ultimately logs all data to a CSV file for maintenance analysis[cite: 549, 588].</p>
+                </div>
+            </section>
+
+            <section class="reveal-up space-y-8 pt-8 border-t border-white/10">
+                <h2 class="text-3xl font-black tracking-tight text-white">Implementation Components</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/camera.jpeg" class="rounded-lg mb-2"><p class="text-[10px] text-center font-bold uppercase">Arducam 5MP</p></div>
+                    <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/motor.jpeg" class="rounded-lg mb-2"><p class="text-[10px] text-center font-bold uppercase">DC Motor</p></div>
+                    <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/regulat.jpeg" class="rounded-lg mb-2"><p class="text-[10px] text-center font-bold uppercase">PWM Control</p></div>
+                    <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/converter.jpeg" class="rounded-lg mb-2"><p class="text-[10px] text-center font-bold uppercase">12V SMPS</p></div>
+                </div>
+                <div class="bg-white/5 border border-white/10 p-8 rounded-3xl shadow-glass">
+                    <h3 class="text-xl font-bold text-white mb-4">Dataset Management</h3>
+                    <img src="assets/database.jpg" alt="Dataset" class="rounded-xl mb-4">
+                    <p class="text-sm text-gray-400">The detection model was trained using 56 high-resolution images, meticulously annotated in Roboflow to classify surface defects across interlocked chain links[cite: 502].</p>
                 </div>
             </section>
 
             <section class="reveal-up bg-[#8b9aff]/10 border border-[#8b9aff]/20 rounded-[32px] p-8 md:p-12 mt-16 shadow-2xl">
-                <h2 class="text-3xl font-black tracking-tight text-white mb-6">Results & Video Demo</h2>
-                <div class="w-full bg-black rounded-2xl overflow-hidden border border-[#8b9aff]/40 shadow-2xl mb-8">
-                    <div class="aspect-video">
-                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/wDmI9NFgoZc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <h2 class="text-3xl font-black tracking-tight text-white mb-6">Performance Evaluation</h2>
+                <div class="aspect-video mb-8">
+                    <iframe class="w-full h-full rounded-2xl" src="https://www.youtube.com/embed/wDmI9NFgoZc" allowfullscreen></iframe>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-black/50 p-6 rounded-2xl border border-white/10">
+                        <h4 class="font-bold text-white mb-2">Live Detection</h4>
+                        <img src="assets/image_f27416.jpg" class="rounded-lg mb-2">
+                        <p class="text-sm text-gray-400">The system provides real-time visual feedback, marking "DEFECTIVE" status and bounding boxes around cracks with high confidence[cite: 637].</p>
+                    </div>
+                    <div class="bg-black/50 p-6 rounded-2xl border border-white/10">
+                        <h4 class="font-bold text-white mb-2">Data Logging</h4>
+                        <img src="assets/log-file.png" class="rounded-lg mb-2">
+                        <p class="text-sm text-gray-400">All results are automatically logged with date, time, and defect counts, facilitating long-term equipment health monitoring[cite: 700, 706].</p>
                     </div>
                 </div>
-                <div class="w-full bg-black rounded-xl overflow-hidden border border-white/10">
-                    <img src="assets/log-file.png" alt="Log File" class="w-full h-auto">
-                </div>
             </section>
-            
         </main>
-
+        
         <footer class="py-12 border-t border-white/10 text-center text-sm text-gray-400 bg-[#0f0f0f]">
             <p>Copyright 2026. Alan Jibin. All rights reserved.</p>
         </footer>
-
     </div>
 
     <script>
-        // JS remains the same for mobile/cursor logic
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const closeMenuBtn = document.getElementById('close-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         if(mobileMenuBtn) mobileMenuBtn.addEventListener('click', (e) => { e.preventDefault(); mobileMenu.classList.remove('opacity-0', 'pointer-events-none'); });
         if(closeMenuBtn) closeMenuBtn.addEventListener('click', () => { mobileMenu.classList.add('opacity-0', 'pointer-events-none'); });
-
         window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('preloader').classList.add('hide-preloader');
+            setTimeout(function() { document.getElementById('preloader').classList.add('hide-preloader');
                 setTimeout(() => { document.querySelectorAll('.reveal-up').forEach(el => el.classList.add('active')); }, 200); 
             }, 600);
         });
