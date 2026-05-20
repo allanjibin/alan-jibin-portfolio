@@ -3,73 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Metal Defect Detection | Alan Jibin</title>
+    <title>Deep Technical Analysis: Metal Defect Detection | Alan Jibin</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body, a, button { cursor: none !important; background-color: #0f0f0f; color: #fcfcfc; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-        .reveal-up { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1); }
-        .reveal-up.active { opacity: 1; transform: translateY(0); }
+        body { background-color: #0f0f0f; color: #e5e7eb; font-family: 'Inter', sans-serif; cursor: none !important; }
         .cursor-dot { width: 8px; height: 8px; background-color: white; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; }
         .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(255, 255, 255, 0.5); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99998; pointer-events: none; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
     </style>
 </head>
-<body class="antialiased font-sans bg-[#0f0f0f] text-gray-200">
+<body class="leading-relaxed">
     <div class="cursor-dot" data-cursor-dot></div>
     <div class="cursor-outline" data-cursor-outline></div>
 
-    <nav class="flex justify-between items-center px-12 py-8 bg-[#0f0f0f]/80 backdrop-blur-md sticky top-0 z-50">
-        <a href="index.html" class="text-xl font-bold text-white">&larr; Back</a>
-        <div class="space-x-8 text-sm font-bold text-gray-400">
-            <a href="projects.html" class="text-white border-b-2 border-[#8b9aff]">Projects</a>
-        </div>
-    </nav>
-
-    <main class="max-w-5xl mx-auto px-6 py-12 space-y-20">
-        <header class="reveal-up space-y-6">
-            <h1 class="text-5xl md:text-7xl font-black text-white tracking-tighter">Automated Metal Crack Detection.</h1>
-            <p class="text-xl text-gray-400">Engineering a non-contact vision system to ensure industrial chain integrity.</p>
+    <main class="max-w-4xl mx-auto px-6 py-20 space-y-24">
+        
+        <header class="space-y-6 text-center">
+            <h1 class="text-5xl font-black text-white tracking-tighter">Real-Time Automated Crack Detection for Interlocked Metal Chains</h1>
+            <img src="assets/conveyor.png" class="w-full rounded-[30px] border border-white/10">
         </header>
 
-        <section class="reveal-up space-y-8">
-            <h2 class="text-3xl font-bold text-white">System Concept</h2>
-            <div class="bg-white/5 p-6 rounded-3xl border border-white/10 shadow-glass">
-                <img src="assets/project-sketch.jpeg" class="rounded-2xl w-full mb-6">
-                <p class="text-gray-400 leading-relaxed">
-                    <strong>The Sketch Explained:</strong> This diagram illustrates the core testing rig. The chain moves through an enclosed aluminum/cardboard box designed to stabilize environmental variables. The Arducam is mounted inside to maintain a fixed focal distance, while the interlocked chain passes through the entry and outlet ports. The laptop atop the box processes the stream in real-time, displaying structural data and defect detection alerts directly to the operator.
-                </p>
+        <section class="space-y-8">
+            <h2 class="text-4xl font-bold text-white border-b border-white/20 pb-4">1. Engineering Architecture & Hardware Components</h2>
+            <p>The proposed system is an integrated mechatronic solution designed for autonomous industrial inspection. At the physical layer, the conveyor system is powered by a high-torque <strong>Micro DC Geared Motor</strong>. This component is selected for its ability to maintain constant linear velocity, ensuring the frame rate of the image acquisition system remains synchronized with the material throughput.</p>
+            <p>To ensure precision, speed is governed by a <strong>PWM (Pulse Width Modulation) Controller</strong>. By manipulating the duty cycle of the motor’s input signal, we regulate velocity without losing the torque necessary to pull the heavy, interlocked metal chains, preventing slippage or jerkiness that could introduce motion blur into the image stream.</p>
+            <p>Energy delivery is stabilized via a <strong>12V AC-DC SMPS (Switched Mode Power Supply)</strong>. Unlike linear regulators, this SMPS utilizes high-frequency switching to achieve high efficiency (typically >85%) while significantly reducing the physical size of the power stage. This provides a clean DC rail for the motor drivers and LED lighting, eliminating electrical noise that could degrade the signal-to-noise ratio in the camera feed[cite: 374, 407, 427].</p>
+            
+            <div class="grid grid-cols-2 gap-6">
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10"><img src="assets/camera.jpeg"><p class="mt-4 font-bold text-sm">Arducam 5MP Module: Optical acquisition unit capable of high-fidelity frame extraction via UVC bus.</p></div>
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10"><img src="assets/motor.jpeg"><p class="mt-4 font-bold text-sm">DC Geared Motor: Provides regulated motion for chain transport through the inspection gate.</p></div>
             </div>
         </section>
 
-        <section class="reveal-up space-y-8">
-            <h2 class="text-3xl font-bold text-white">Live Demonstration</h2>
-            <div class="aspect-video bg-black rounded-3xl overflow-hidden border border-[#8b9aff]/30 shadow-2xl">
-                <iframe class="w-full h-full" src="https://www.youtube.com/embed/wDmI9NFgoZc" allowfullscreen></iframe>
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-white">2. System Concept & Logic Sketch</h2>
+            <div class="w-1/2 float-left mr-8 mb-4">
+                <img src="assets/project-sketch.jpeg" class="rounded-2xl border border-white/10">
             </div>
+            <p class="text-lg">This sketch delineates the spatial constraints of the system. The enclosure is constructed from a rigid aluminum-cardboard composite, which acts as a Faraday cage of sorts, minimizing external EMI (Electro-Magnetic Interference) and ensuring consistent, diffused lighting—a non-negotiable requirement for accurate edge detection. The laptop serves as the central processing unit, running the YOLOv8 inference engine. By placing the Arducam within a fixed-geometry housing, we establish a constant focal distance, meaning the model does not need to handle varying object distances, thus significantly improving the mean Average Precision (mAP) during the inference phase[cite: 396].</p>
         </section>
 
-        <section class="reveal-up grid md:grid-cols-2 gap-12">
-            <div class="space-y-4">
-                <h3 class="text-2xl font-bold text-white">Hardware Diagram</h3>
-                <img src="assets/block-diagram.png" class="rounded-2xl border border-white/10">
-                <p class="text-sm text-gray-400">The diagram outlines the data acquisition pathway: DC motor control via PWM, Arducam interface, and buzzer-based alarm logic triggered by defect classification[cite: 374].</p>
-            </div>
-            <div class="space-y-4">
-                <h3 class="text-2xl font-bold text-white">Operational Flow</h3>
-                <img src="assets/flowchart.png" class="rounded-2xl border border-white/10">
-                <p class="text-sm text-gray-400">The software cycle: System Setup → Frame Capture → YOLOv8 Inference → Defect Decision → CSV Logging[cite: 559].</p>
-            </div>
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-white">3. System Architecture & Flowchart Deep-Dive</h2>
+            <img src="assets/block-diagram.png" class="w-full rounded-2xl border border-white/10 mb-8">
+            <p>The system is logically partitioned into three functional domains. The <strong>Data Acquisition Tier</strong> operates as the physical sensory layer, transforming mechanical movements into digital signals. The <strong>Processing Unit</strong> functions as the algorithmic core, where Python 3.11 manages the inference lifecycle. The <strong>Output Interface</strong> acts as the execution layer—it interprets the binary results ("Safe" vs "Defective") and triggers mechanical or acoustic response modules.</p>
+            
+            <img src="assets/flowchart.png" class="w-full rounded-2xl border border-white/10 mb-8">
+            <p>The flowchart depicts the conditional state machine logic. It begins with the initial calibration (loading the .pt weights). The scan loop is an interrupt-driven process; should the model confidence exceed the 0.15 threshold, the global variable <code>chain_is_safe</code> is toggled to false, and the buzzer output is latched. This state-machine design ensures the system handles errors gracefully, maintaining a log of all detections in a CSV file for archival verification[cite: 588].</p>
         </section>
 
-        <section class="reveal-up space-y-8">
-            <h2 class="text-3xl font-bold text-white">Implementation Components</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/camera.jpeg" class="rounded-lg mb-2"><p class="text-[10px] text-center font-bold">Arducam 5MP</p></div>
-                <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/motor.jpeg" class="rounded-lg mb-2"><p class="text-[10px] text-center font-bold">DC Motor</p></div>
-                <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/regulat.jpeg" class="rounded-lg mb-2"><p class="text-[10px] text-center font-bold">PWM Control</p></div>
-                <div class="bg-black border border-white/10 p-4 rounded-2xl"><img src="assets/converter.jpeg" class="rounded-lg mb-2"><p class="text-[10px] text-center font-bold">12V SMPS</p></div>
-            </div>
-        </section>
     </main>
 
     <script>
@@ -79,10 +60,6 @@
             cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
             cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
         });
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
