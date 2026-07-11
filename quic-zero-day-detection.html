@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Technical Analysis: QUIC Zero-Day Detection | Alan Jibin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0f0f0f; color: #e5e7eb; font-family: 'Inter', sans-serif; cursor: none !important; -webkit-font-smoothing: antialiased; }
+        a { cursor: none !important; }
+        .cursor-dot { width: 8px; height: 8px; background-color: white; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(255, 255, 255, 0.5); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99998; pointer-events: none; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
+        @media (max-width: 768px) { .cursor-dot, .cursor-outline { display: none !important; } body, a { cursor: auto !important; } }
+    </style>
+</head>
+<body class="leading-relaxed">
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <nav class="flex justify-between items-center px-6 py-8 md:px-12 border-b border-white/20 max-w-4xl mx-auto">
+        <a href="index.html" class="text-xl font-bold tracking-tight text-white hover:text-[#8b9aff] transition-colors">Alan Jibin.</a>
+        <a href="projects.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">&larr; Back to Projects</a>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-20 space-y-24">
+
+        <header class="space-y-6 text-center">
+            <span class="bg-white/10 text-white border border-white/20 px-4 py-1.5 inline-block rounded-full text-sm font-medium tracking-tight">Ongoing Research &middot; Targeting SECRYPT 2026</span>
+            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tighter">Unsupervised Zero-Day Detection in Encrypted QUIC Traffic</h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">Investigating anomaly-based detection for the QUIC transport protocol, where end-to-end encryption blocks the payload-inspection techniques traditional intrusion detection systems rely on.</p>
+        </header>
+
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-white border-b border-white/20 pb-4">1. Why QUIC Breaks Traditional IDS</h2>
+            <p>QUIC (the transport protocol underlying HTTP/3) encrypts almost everything above the UDP layer by default, including handshake metadata that older protocols like TCP left exposed. This is great for user privacy, but it strips away the signals that signature-based and deep packet inspection systems have historically relied on to spot malicious traffic. A zero-day attack &mdash; one with no known signature to match against &mdash; makes this problem worse still, since there's no pattern in any database to look for in the first place.</p>
+            <p>This project starts from the hierarchical ML approach for UDP-QUIC intrusion detection proposed by Jafari, Shafi, and Lashkari as a base paper, and extends the framing toward a fully <strong>unsupervised</strong> setting: detecting anomalous behavior in encrypted flow-level metadata (timing, packet size distributions, connection patterns) without requiring labeled attack examples at all.</p>
+        </section>
+
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-white border-b border-white/20 pb-4">2. Proposed Approach</h2>
+            <p>The core idea under investigation is an <strong>Isolation Forest</strong>-based anomaly detector operating purely on statistical flow features extractable without decrypting payloads &mdash; packet inter-arrival times, flow duration, byte-count distributions, and connection-establishment patterns. Because it requires no labeled attack data, this approach is designed to generalize to attack types that haven't been seen before, which is the entire point of "zero-day" detection.</p>
+            <p>Early-stage work has focused on building the seminar and presentation material framing this problem for a SECRYPT audience, situating it against the base paper's supervised hierarchical classifier and identifying where an unsupervised approach offers a genuine advantage &mdash; and where it trades away detection precision to get there.</p>
+        </section>
+
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-white border-b border-white/20 pb-4">3. Status</h2>
+            <p class="text-gray-400">This project is in active development. The next phase involves sourcing or generating labeled QUIC traffic captures for evaluation purposes only (not training), building the feature extraction pipeline, and benchmarking the Isolation Forest approach against the supervised baseline from the base paper.</p>
+        </section>
+
+    </main>
+
+    <footer class="py-12 border-t border-white/10 text-center text-sm text-gray-400 max-w-4xl mx-auto">
+        <p>Copyright 2026. Alan Jibin. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const cursorDot = document.querySelector("[data-cursor-dot]");
+        const cursorOutline = document.querySelector("[data-cursor-outline]");
+        window.addEventListener("mousemove", (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+        });
+    </script>
+</body>
+</html>
