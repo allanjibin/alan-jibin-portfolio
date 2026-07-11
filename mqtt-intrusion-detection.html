@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deep Technical Analysis: MQTT Intrusion Detection | Alan Jibin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0f0f0f; color: #e5e7eb; font-family: 'Inter', sans-serif; cursor: none !important; -webkit-font-smoothing: antialiased; }
+        a { cursor: none !important; }
+        .cursor-dot { width: 8px; height: 8px; background-color: white; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; }
+        .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(255, 255, 255, 0.5); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99998; pointer-events: none; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
+        @media (max-width: 768px) { .cursor-dot, .cursor-outline { display: none !important; } body, a { cursor: auto !important; } }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid rgba(255,255,255,0.1); padding: 12px 16px; text-align: left; font-size: 0.95rem; }
+        th { background: rgba(139,154,255,0.08); color: #8b9aff; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; font-size: 0.75rem; }
+        tr.highlight td { background: rgba(139,154,255,0.1); color: white; font-weight: 600; }
+    </style>
+</head>
+<body class="leading-relaxed">
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <nav class="flex justify-between items-center px-6 py-8 md:px-12 border-b border-white/20 max-w-4xl mx-auto">
+        <a href="index.html" class="text-xl font-bold tracking-tight text-white hover:text-[#8b9aff] transition-colors">Alan Jibin.</a>
+        <a href="projects.html" class="text-sm font-medium text-gray-400 hover:text-white transition-colors">&larr; Back to Projects</a>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-20 space-y-24">
+
+        <header class="space-y-6 text-center">
+            <span class="text-[#8b9aff] font-bold tracking-widest text-xs uppercase">Research &middot; Targeting SECRYPT 2026</span>
+            <h1 class="text-4xl md:text-5xl font-black text-white tracking-tighter">Multi-Class Intrusion Detection in MQTT-Based IoT Networks</h1>
+            <p class="text-lg text-gray-400 max-w-2xl mx-auto">A full machine learning pipeline built on the BCCC-IoT-MQTT-IDS-2025 dataset, comparing class-balancing strategies and six classifiers to find a deployable intrusion detection model for MQTT traffic.</p>
+        </header>
+
+        <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+                <p class="text-3xl font-black text-white">6.2M+</p>
+                <p class="text-xs text-gray-400 mt-1 uppercase tracking-wide">Raw Records</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+                <p class="text-3xl font-black text-white">138</p>
+                <p class="text-xs text-gray-400 mt-1 uppercase tracking-wide">Features Selected</p>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+                <p class="text-3xl font-black text-white">36</p>
+                <p class="text-xs text-gray-400 mt-1 uppercase tracking-wide">Model Configurations</p>
+            </div>
+            <div class="bg-white/5 border border-[#8b9aff]/40 rounded-2xl p-6 text-center bg-[#8b9aff]/10">
+                <p class="text-3xl font-black text-[#8b9aff]">87.71%</p>
+                <p class="text-xs text-gray-300 mt-1 uppercase tracking-wide">Best Accuracy</p>
+            </div>
+        </section>
+
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-white border-b border-white/20 pb-4">1. Dataset & Feature Engineering</h2>
+            <p>The pipeline is built on the <strong>BCCC-IoT-MQTT-IDS-2025</strong> dataset, a large-scale labeled capture of both benign and attack traffic on the MQTT protocol &mdash; the lightweight publish/subscribe messaging standard underlying most IoT device communication. Working from over <strong>6.2 million raw records</strong>, the first challenge was scale: the dataset spans roughly 156 GB before reduction, which meant every stage of the pipeline had to be built for memory efficiency rather than convenience, given a development machine without CUDA acceleration.</p>
+            <p>Stratified sampling was used to preserve the original class distribution while cutting the dataset down to a workable size, ensuring rare attack classes weren't accidentally erased in the process. From there, feature importance was ranked using a <strong>one-vs-rest XGBoost</strong> approach across each attack category individually, rather than a single global importance score &mdash; this matters because a feature that's irrelevant for detecting one attack type can be the single most predictive signal for another. The result was a reduction from hundreds of raw fields down to <strong>138 high-signal features</strong>, kept for all downstream models.</p>
+        </section>
+
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-white border-b border-white/20 pb-4">2. The Class Imbalance Problem</h2>
+            <p>Like most real-world network traffic, the dataset is heavily skewed: benign traffic and a handful of dominant attack types vastly outnumber rarer attacks like <strong>SYN flooding</strong> and <strong>basic connect flooding</strong>. Left untreated, this causes models to effectively ignore minority classes while still posting misleadingly high overall accuracy.</p>
+            <p>Two balancing strategies were built and compared head-to-head:</p>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
+                    <p class="font-bold text-white mb-2">Variant 1 &mdash; SMOTE Oversampling</p>
+                    <p class="text-sm text-gray-400">Synthetically generated samples for minority classes. Improved raw class representation but led to <span class="text-white">class collapse</span> on the rarest attack types, where models struggled to generalize from synthetic points.</p>
+                </div>
+                <div class="bg-white/5 p-6 rounded-2xl border border-[#8b9aff]/30">
+                    <p class="font-bold text-[#8b9aff] mb-2">Variant 2 &mdash; Dominant-Class Downsampling</p>
+                    <p class="text-sm text-gray-400">Reduced the size of over-represented classes instead of inflating rare ones. Slightly lower ceiling on overall accuracy, but <span class="text-white">significantly better detection</span> of minority attack types &mdash; the metric that actually matters for a security system.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-white border-b border-white/20 pb-4">3. Model Comparison</h2>
+            <p>Six classifiers &mdash; Random Forest, XGBoost, Decision Tree, Neural Network, MLP, and Naive Bayes &mdash; were trained and evaluated across both balancing variants and three train/test splits (60:40, 70:30, 80:20), producing <strong>36 distinct configurations</strong>. Split ratio variation turned out to be largely negligible at this dataset size; the balancing strategy was the dominant factor in outcomes.</p>
+            <table>
+                <thead>
+                    <tr><th>Model</th><th>Variant</th><th>Split</th><th>Accuracy</th><th>Weighted F1</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight"><td>Random Forest</td><td>v2 (Downsampled)</td><td>80:20</td><td>87.71%</td><td>0.8771</td></tr>
+                    <tr><td>Gradient Boosting</td><td>v2 (Downsampled)</td><td>80:20</td><td>87.74%</td><td>&mdash;</td></tr>
+                    <tr><td>XGBoost</td><td>v2 (Downsampled)</td><td>80:20</td><td>&mdash;</td><td>&mdash;</td></tr>
+                    <tr><td>Naive Bayes</td><td>v1 (SMOTE)</td><td>&mdash;</td><td>Lowest</td><td>Lowest</td></tr>
+                </tbody>
+            </table>
+            <p class="text-sm text-gray-500">Random Forest on the downsampled (v2) variant at an 80:20 split was selected as the recommended deployment model &mdash; Gradient Boosting posted a marginally higher raw accuracy (87.74%) but at roughly 3&times; the training cost (~790s vs. ~273s), making Random Forest the better trade-off for practical deployment.</p>
+        </section>
+
+        <section class="space-y-6">
+            <h2 class="text-3xl font-bold text-white border-b border-white/20 pb-4">4. Positioning Against Existing Work</h2>
+            <p>To contextualize the approach, the pipeline was benchmarked conceptually against <strong>MQTTFlowLyzer</strong>, a recent TabNet-based MQTT intrusion detection system. The comparison highlighted genuine points of differentiation &mdash; particularly the per-class feature selection strategy and the explicit downsampling-vs-SMOTE analysis &mdash; which form the core contribution of the SECRYPT submission currently in preparation.</p>
+        </section>
+
+    </main>
+
+    <footer class="py-12 border-t border-white/10 text-center text-sm text-gray-400 max-w-4xl mx-auto">
+        <p>Copyright 2026. Alan Jibin. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const cursorDot = document.querySelector("[data-cursor-dot]");
+        const cursorOutline = document.querySelector("[data-cursor-outline]");
+        window.addEventListener("mousemove", (e) => {
+            cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+            cursorOutline.animate({ left: `${e.clientX}px`, top: `${e.clientY}px` }, { duration: 500, fill: "forwards" });
+        });
+    </script>
+</body>
+</html>
