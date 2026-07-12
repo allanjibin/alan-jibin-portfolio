@@ -35,11 +35,109 @@
             <p class="text-lg text-gray-400 max-w-2xl mx-auto">A full machine learning pipeline built on the BCCC-IoT-MQTT-IDS-2025 dataset, comparing class-balancing strategies and six classifiers to find a deployable intrusion detection model for MQTT traffic.</p>
         </header>
 
-        <section>
-            <div class="bg-white rounded-2xl border border-white/10 p-4 md:p-8 overflow-hidden">
-                <img src="assets/ml-pipeline-flowchart.png" alt="MQTT Intrusion Detection ML Pipeline Flowchart" class="w-full h-auto rounded-lg">
+        <section class="space-y-8">
+            <p class="text-center text-sm text-gray-500 -mb-2">End-to-end pipeline: stratified sampling &rarr; feature reduction &rarr; two balancing strategies &rarr; six classifiers &rarr; 36 evaluated configurations.</p>
+
+            <div class="flex flex-col items-center gap-3">
+
+                <div class="bg-white/5 backdrop-blur-xl border border-white/15 rounded-2xl px-6 py-4 text-center w-full max-w-md">
+                    <p class="font-bold text-white">BCCC-IoT-MQTT-IDS-2025</p>
+                    <p class="text-xs text-gray-400 mt-1">Raw dataset (~156 GB, 13 CSV files)</p>
+                </div>
+                <span class="text-gray-600 text-xl">&darr;</span>
+
+                <div class="bg-white/5 backdrop-blur-xl border border-white/15 rounded-2xl px-6 py-4 text-center w-full max-w-md">
+                    <p class="font-bold text-white">Stratified 10% Sampling</p>
+                    <p class="text-xs text-gray-400 mt-1">Chunked streaming, min 1 row/class</p>
+                </div>
+                <span class="text-gray-600 text-xl">&darr;</span>
+
+                <div class="bg-[#8b9aff]/10 backdrop-blur-xl border border-[#8b9aff]/30 rounded-2xl px-6 py-4 text-center w-full max-w-md">
+                    <p class="font-bold text-[#8b9aff]">Feature Reduction</p>
+                    <p class="text-xs text-gray-300 mt-1">One-vs-rest XGBoost &rarr; 138 features</p>
+                </div>
+                <span class="text-gray-600 text-xl">&darr;</span>
+                <p class="text-xs text-gray-500 uppercase tracking-wide">Two balancing strategies</p>
+
+                <div class="grid grid-cols-2 gap-6 w-full max-w-2xl">
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="bg-emerald-400/10 backdrop-blur-xl border border-emerald-400/30 rounded-2xl px-4 py-4 text-center w-full">
+                            <p class="font-bold text-emerald-300">Dataset v1</p>
+                            <p class="text-xs text-gray-400 mt-1">SMOTE (oversample minority)</p>
+                        </div>
+                        <span class="text-gray-600 text-xl">&darr;</span>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-wide">Stratified splits</p>
+                        <div class="grid grid-cols-3 gap-2 w-full">
+                            <div class="bg-emerald-400/5 border border-emerald-400/20 rounded-lg py-2 text-center text-xs text-emerald-200">60:40</div>
+                            <div class="bg-emerald-400/5 border border-emerald-400/20 rounded-lg py-2 text-center text-xs text-emerald-200">70:30</div>
+                            <div class="bg-emerald-400/5 border border-emerald-400/20 rounded-lg py-2 text-center text-xs text-emerald-200">80:20</div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="bg-orange-400/10 backdrop-blur-xl border border-orange-400/30 rounded-2xl px-4 py-4 text-center w-full">
+                            <p class="font-bold text-orange-300">Dataset v2</p>
+                            <p class="text-xs text-gray-400 mt-1">Downsample dominant class</p>
+                        </div>
+                        <span class="text-gray-600 text-xl">&darr;</span>
+                        <p class="text-[10px] text-gray-500 uppercase tracking-wide">Stratified splits</p>
+                        <div class="grid grid-cols-3 gap-2 w-full">
+                            <div class="bg-orange-400/5 border border-orange-400/20 rounded-lg py-2 text-center text-xs text-orange-200">60:40</div>
+                            <div class="bg-orange-400/5 border border-orange-400/20 rounded-lg py-2 text-center text-xs text-orange-200">70:30</div>
+                            <div class="bg-orange-400/5 border border-orange-400/20 rounded-lg py-2 text-center text-xs text-orange-200">80:20</div>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="text-gray-600 text-xl">&darr;</span>
+                <p class="text-xs text-gray-500 uppercase tracking-wide">36 train/test pairs total (6 splits &times; 2 datasets)</p>
+
+                <div class="bg-[#8b9aff]/10 backdrop-blur-xl border border-[#8b9aff]/30 rounded-2xl px-6 py-4 text-center w-full max-w-md">
+                    <p class="font-bold text-[#8b9aff]">Train & Evaluate 6 Classifiers</p>
+                    <p class="text-xs text-gray-300 mt-1">StandardScaler &middot; LabelEncoder &middot; joblib</p>
+                </div>
+                <span class="text-gray-600 text-xl">&darr;</span>
+
+                <div class="grid grid-cols-3 md:grid-cols-6 gap-2 w-full max-w-3xl">
+                    <div class="bg-sky-400/10 border border-sky-400/25 rounded-xl py-3 text-center">
+                        <p class="text-xs font-bold text-sky-200">Random Forest</p>
+                    </div>
+                    <div class="bg-sky-400/10 border border-sky-400/25 rounded-xl py-3 text-center">
+                        <p class="text-xs font-bold text-sky-200">XGBoost</p>
+                    </div>
+                    <div class="bg-sky-400/10 border border-sky-400/25 rounded-xl py-3 text-center">
+                        <p class="text-xs font-bold text-sky-200">Decision Tree</p>
+                    </div>
+                    <div class="bg-sky-400/10 border border-sky-400/25 rounded-xl py-3 text-center">
+                        <p class="text-xs font-bold text-sky-200">Neural Net</p>
+                    </div>
+                    <div class="bg-sky-400/10 border border-sky-400/25 rounded-xl py-3 text-center">
+                        <p class="text-xs font-bold text-sky-200">MLP</p>
+                    </div>
+                    <div class="bg-sky-400/10 border border-sky-400/25 rounded-xl py-3 text-center">
+                        <p class="text-xs font-bold text-sky-200">Naive Bayes</p>
+                    </div>
+                </div>
+
+                <span class="text-gray-600 text-xl">&darr;</span>
+
+                <div class="bg-[#8b9aff]/10 backdrop-blur-xl border border-[#8b9aff]/30 rounded-2xl px-6 py-4 text-center w-full max-w-md">
+                    <p class="font-bold text-[#8b9aff]">Evaluation Metrics</p>
+                    <p class="text-xs text-gray-300 mt-1">Accuracy &middot; F1 &middot; Precision &middot; Recall &middot; Confusion Matrix</p>
+                </div>
+                <span class="text-gray-600 text-xl">&darr;</span>
+
+                <div class="bg-white/5 backdrop-blur-xl border border-white/15 rounded-2xl px-6 py-4 text-center w-full max-w-md">
+                    <p class="font-bold text-white">Results (36 Model Evaluations)</p>
+                    <p class="text-xs text-gray-400 mt-1">Per-class F1 &middot; Confusion matrices &middot; .pkl models</p>
+                </div>
             </div>
-            <p class="text-center text-sm text-gray-500 mt-3">End-to-end pipeline: stratified sampling &rarr; feature reduction &rarr; two balancing strategies &rarr; six classifiers &rarr; 36 evaluated configurations.</p>
+
+            <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 pt-2 text-xs text-gray-400">
+                <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span> v1: SMOTE oversampling</span>
+                <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-orange-400 inline-block"></span> v2: Downsampling</span>
+                <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 inline-block"></span> Classifiers</span>
+                <span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-[#8b9aff] inline-block"></span> Pipeline stages</span>
+            </div>
         </section>
 
         <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
