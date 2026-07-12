@@ -90,61 +90,61 @@
                 </p>
             </div>
 
-            <div>
-                <h2 class="text-3xl font-bold tracking-tight text-white mb-6">Build Gallery.</h2>
-                <p class="mb-10 text-gray-400">A look at the process, from raw materials on the workbench to a calibrated, working prototype.</p>
-
-                <div class="space-y-14">
-
-                    <figure>
-                        <div class="w-full rounded-3xl overflow-hidden border border-white/10">
-                            <img src="assets/glove-workspace.jpeg" alt="Build workspace with soldering iron, protractor, wire cutters and tools" class="w-full h-auto">
-                        </div>
-                        <figcaption class="mt-4 text-gray-400">
-                            <span class="text-white font-semibold">The workbench.</span> Most of this build happened here — a soldering iron, wire strippers, a protractor for measuring finger-bend angles, and a multimeter for testing every sensor before it went anywhere near the glove. Nothing glamorous, just a lot of trial and error: stripping wire, tinning leads, and checking continuity one connection at a time before committing anything to the final assembly.
-                        </figcaption>
-                    </figure>
-
-                    <figure>
-                        <div class="w-full rounded-3xl overflow-hidden border border-white/10">
-                            <img src="assets/glove-diy-sensors.jpeg" alt="Handmade flex sensors made from copper tape, velostat, and plastic sheeting" class="w-full h-auto">
-                        </div>
-                        <figcaption class="mt-4 text-gray-400">
-                            <span class="text-white font-semibold">Homemade flex sensors.</span> Rather than buying commercial flex sensors, these were built from scratch using copper tape, a thin transparent plastic sheet, and a layer of Velostat sandwiched in between. Velostat is pressure- and bend-sensitive — its resistance changes as it's flexed — so with copper tape as the electrode on each side, folding the plastic strip creates a working resistive flex sensor for a fraction of the cost of an off-the-shelf one. Each strip visible here represents a different iteration in getting the sensor width, tape alignment, and wiring consistent enough to trust.
-                        </figcaption>
-                    </figure>
-
-                    <figure>
-                        <div class="w-full rounded-3xl overflow-hidden border border-white/10">
-                            <img src="assets/glove-final-prototype.jpeg" alt="Finished glove prototype wired to an ESP32 with live sensor calibration readings on screen" class="w-full h-auto">
-                        </div>
-                        <figcaption class="mt-4 text-gray-400">
-                            <span class="text-white font-semibold">The finished prototype.</span> All five homemade flex sensors mounted onto a glove and wired into an ESP32 on a breadboard. In the background, the Arduino IDE's Serial Monitor is streaming live calibration data — raw analog readings for the thumb, index, middle, and ring fingers as they bend. This live-reading step was essential for setting the resistance thresholds each gesture would later be mapped against.
-                        </figcaption>
-                    </figure>
-
-                    <figure>
-                        <div class="w-full max-w-sm mx-auto rounded-3xl overflow-hidden border border-white/10">
-                            <img src="assets/glove-sensor-multimeter.jpeg" alt="Multimeter reading the resistance of one of the homemade flex sensors" class="w-full h-auto">
-                        </div>
-                        <figcaption class="mt-4 text-gray-400 text-center max-w-md mx-auto">
-                            <span class="text-white font-semibold">Validating each sensor.</span> Before any sensor made it onto the glove, its resistance was checked individually with a multimeter — here reading 01.1 (kΩ) at rest. Comparing this baseline reading across all five sensors helped catch inconsistent ones early, before they could introduce noise into the gesture-recognition logic.
-                        </figcaption>
-                    </figure>
-
-                    <figure>
-                        <div class="w-full rounded-3xl overflow-hidden border border-white/10 bg-white/5">
-                            <img src="assets/glove-concept-render.jpeg" alt="AI-generated concept render of the assistive glove design" class="w-full h-auto">
-                        </div>
-                        <figcaption class="mt-4 text-gray-400">
-                            <span class="text-white font-semibold">Concept design.</span> An AI-generated render exploring what a more refined, product-level version of the glove could look like — sensor strips integrated cleanly along each finger rather than taped on, hinting at the direction future iterations of this project could take.
-                        </figcaption>
-                    </figure>
-
-                </div>
-            </div>
-
         </main>
+
+        <section class="px-6 md:px-12 max-w-5xl mx-auto pb-32">
+            <h2 class="text-3xl font-bold tracking-tight text-white mb-6">Build Gallery.</h2>
+            <p class="mb-10 text-gray-400 text-lg leading-relaxed">A look at the process, from raw materials on the workbench to a calibrated, working prototype.</p>
+
+            <div class="space-y-16">
+
+                <figure class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shrink-0">
+                        <img src="assets/glove-workspace.jpeg" alt="Build workspace with soldering iron, protractor, wire cutters and tools" class="w-full h-auto">
+                    </div>
+                    <figcaption class="w-full md:w-1/2 text-gray-400 text-lg leading-relaxed">
+                        <span class="text-white font-semibold block mb-2 text-xl">The workbench.</span> Most of this build happened here — a soldering iron, wire strippers, a protractor for measuring finger-bend angles, and a multimeter for testing every sensor before it went anywhere near the glove. Nothing glamorous, just a lot of trial and error: stripping wire, tinning leads, and checking continuity one connection at a time before committing anything to the final assembly.
+                    </figcaption>
+                </figure>
+
+                <figure class="flex flex-col md:flex-row-reverse items-center gap-8">
+                    <div class="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shrink-0">
+                        <img src="assets/glove-diy-sensors.jpeg" alt="Handmade flex sensors made from copper tape, velostat, and plastic sheeting" class="w-full h-auto">
+                    </div>
+                    <figcaption class="w-full md:w-1/2 text-gray-400 text-lg leading-relaxed">
+                        <span class="text-white font-semibold block mb-2 text-xl">Homemade flex sensors.</span> Rather than buying commercial flex sensors, these were built from scratch using copper tape, a thin transparent plastic sheet, and a layer of Velostat sandwiched in between. Velostat is pressure- and bend-sensitive — its resistance changes as it's flexed — so with copper tape as the electrode on each side, folding the plastic strip creates a working resistive flex sensor for a fraction of the cost of an off-the-shelf one. Each strip visible here represents a different iteration in getting the sensor width, tape alignment, and wiring consistent enough to trust.
+                    </figcaption>
+                </figure>
+
+                <figure class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shrink-0">
+                        <img src="assets/glove-final-prototype.jpeg" alt="Finished glove prototype wired to an ESP32 with live sensor calibration readings on screen" class="w-full h-auto">
+                    </div>
+                    <figcaption class="w-full md:w-1/2 text-gray-400 text-lg leading-relaxed">
+                        <span class="text-white font-semibold block mb-2 text-xl">The finished prototype.</span> All five homemade flex sensors mounted onto a glove and wired into an ESP32 on a breadboard. In the background, the Arduino IDE's Serial Monitor is streaming live calibration data — raw analog readings for the thumb, index, middle, and ring fingers as they bend. This live-reading step was essential for setting the resistance thresholds each gesture would later be mapped against.
+                    </figcaption>
+                </figure>
+
+                <figure class="flex flex-col md:flex-row-reverse items-center gap-8">
+                    <div class="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shrink-0">
+                        <img src="assets/glove-sensor-multimeter.jpeg" alt="Multimeter reading the resistance of one of the homemade flex sensors" class="w-full h-auto">
+                    </div>
+                    <figcaption class="w-full md:w-1/2 text-gray-400 text-lg leading-relaxed">
+                        <span class="text-white font-semibold block mb-2 text-xl">Validating each sensor.</span> Before any sensor made it onto the glove, its resistance was checked individually with a multimeter — here reading 01.1 (kΩ) at rest. Comparing this baseline reading across all five sensors helped catch inconsistent ones early, before they could introduce noise into the gesture-recognition logic.
+                    </figcaption>
+                </figure>
+
+                <figure class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 bg-white/5 shrink-0">
+                        <img src="assets/glove-concept-render.jpeg" alt="AI-generated concept render of the assistive glove design" class="w-full h-auto">
+                    </div>
+                    <figcaption class="w-full md:w-1/2 text-gray-400 text-lg leading-relaxed">
+                        <span class="text-white font-semibold block mb-2 text-xl">Concept design.</span> An AI-generated render exploring what a more refined, product-level version of the glove could look like — sensor strips integrated cleanly along each finger rather than taped on, hinting at the direction future iterations of this project could take.
+                    </figcaption>
+                </figure>
+
+            </div>
+        </section>
         
         <footer class="py-12 border-t border-white/20 text-center text-sm text-gray-400">
             <p>Copyright 2026. Alan Jibin. All rights reserved.</p>
