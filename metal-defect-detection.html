@@ -3,55 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deep Technical Analysis: Metal Defect Detection | Alan Jibin</title>
+    <title>Real-Time Metal Chain Crack Detection | Alan Jibin</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: { black: '#0f0f0f', white: '#fcfcfc', }
+                }
+            }
+        }
+    </script>
     <style>
-        body { background-color: #0f0f0f; color: #e5e7eb; font-family: 'Inter', sans-serif; cursor: none !important; }
+        body {
+            background-color: #0f0f0f;
+            color: #fcfcfc;
+            cursor: none !important;
+            -webkit-font-smoothing: antialiased;
+        }
+        .hover-underline:hover { text-decoration: underline; text-underline-offset: 4px; }
         .cursor-dot { width: 8px; height: 8px; background-color: white; position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99999; pointer-events: none; }
         .cursor-outline { width: 40px; height: 40px; border: 2px solid rgba(255, 255, 255, 0.5); position: fixed; top: 0; left: 0; transform: translate(-50%, -50%); border-radius: 50%; z-index: 99998; pointer-events: none; transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s; }
+        @media (max-width: 768px) {
+            .cursor-dot, .cursor-outline { display: none !important; }
+            body { cursor: auto !important; }
+        }
     </style>
 </head>
-<body class="leading-relaxed">
+<body class="antialiased font-sans selection:bg-white selection:text-black">
+
     <div class="cursor-dot" data-cursor-dot></div>
     <div class="cursor-outline" data-cursor-outline></div>
 
-    <main class="max-w-4xl mx-auto px-6 py-20 space-y-24">
-        
-        <header class="space-y-6 text-center">
-            <h1 class="text-5xl font-black text-white tracking-tighter">Real-Time Automated Crack Detection for Interlocked Metal Chains</h1>
-            <img src="assets/conveyor.png" class="w-full rounded-[30px] border border-white/10">
+    <div class="w-full">
+
+        <nav class="flex justify-between items-center px-6 py-8 md:px-12 border-b border-white/20 bg-[#0f0f0f] relative z-50">
+            <a href="index.html" class="text-xl font-bold tracking-tight text-white hover-underline">&larr; Alan Jibin.</a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-white">
+                <a href="index.html" class="hover-underline">Home.</a>
+                <a href="projects.html" class="hover-underline">Projects.</a>
+                <a href="about.html" class="hover-underline">About.</a>
+                <a href="blog.html" class="hover-underline">Blog.</a>
+            </div>
+            <a href="index.html" class="md:hidden text-sm font-medium hover-underline text-white">Back.</a>
+        </nav>
+
+        <header class="py-20 px-6 md:px-12 max-w-5xl mx-auto text-center mt-10">
+            <div class="inline-flex flex-wrap justify-center items-center gap-3 mb-8">
+                <span class="bg-white/10 border border-white/20 text-white px-4 py-1.5 rounded-full text-sm font-medium">Computer Vision</span>
+                <span class="bg-white/10 border border-white/20 text-white px-4 py-1.5 rounded-full text-sm font-medium">YOLOv8</span>
+                <span class="bg-white/10 border border-white/20 text-white px-4 py-1.5 rounded-full text-sm font-medium">Python / OpenCV</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-black tracking-tighter leading-tight mb-6 text-white">Real-Time Crack Detection for Interlocked Metal Chains.</h1>
+            <p class="text-xl md:text-2xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                A non-contact inspection rig that watches chains move across a conveyor and flags surface cracks in real time — built from a hand-drawn concept to a working prototype logging PASS/FAIL results.
+            </p>
         </header>
 
-        <section class="space-y-8">
-            <h2 class="text-4xl font-bold text-white border-b border-white/20 pb-4">1. Engineering Architecture & Hardware Components</h2>
-            <p>The proposed system is an integrated mechatronic solution designed for autonomous industrial inspection. At the physical layer, the conveyor system is powered by a high-torque <strong>Micro DC Geared Motor</strong>. This component is selected for its ability to maintain constant linear velocity, ensuring the frame rate of the image acquisition system remains synchronized with the material throughput.</p>
-            <p>To ensure precision, speed is governed by a <strong>PWM (Pulse Width Modulation) Controller</strong>. By manipulating the duty cycle of the motor’s input signal, we regulate velocity without losing the torque necessary to pull the heavy, interlocked metal chains, preventing slippage or jerkiness that could introduce motion blur into the image stream.</p>
-            <p>Energy delivery is stabilized via a <strong>12V AC-DC SMPS (Switched Mode Power Supply)</strong>. Unlike linear regulators, this SMPS utilizes high-frequency switching to achieve high efficiency (typically >85%) while significantly reducing the physical size of the power stage. This provides a clean DC rail for the motor drivers and LED lighting, eliminating electrical noise that could degrade the signal-to-noise ratio in the camera feed[cite: 374, 407, 427].</p>
-            
-            <div class="grid grid-cols-2 gap-6">
-                <div class="bg-white/5 p-6 rounded-2xl border border-white/10"><img src="assets/camera.jpeg"><p class="mt-4 font-bold text-sm">Arducam 5MP Module: Optical acquisition unit capable of high-fidelity frame extraction via UVC bus.</p></div>
-                <div class="bg-white/5 p-6 rounded-2xl border border-white/10"><img src="assets/motor.jpeg"><p class="mt-4 font-bold text-sm">DC Geared Motor: Provides regulated motion for chain transport through the inspection gate.</p></div>
+        <section class="px-6 md:px-12 max-w-6xl mx-auto mb-20">
+            <div class="w-full aspect-video bg-white/5 border border-white/10 rounded-[40px] flex items-center justify-center overflow-hidden">
+                <img src="assets/rig-overhead.jpeg" alt="Finished conveyor rig with camera and lighting, overhead view" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700">
             </div>
         </section>
 
-        <section class="space-y-6">
-            <h2 class="text-3xl font-bold text-white">2. System Concept & Logic Sketch</h2>
-            <div class="w-1/2 float-left mr-8 mb-4">
-                <img src="assets/project-sketch.jpeg" class="rounded-2xl border border-white/10">
+        <main class="px-6 md:px-12 max-w-3xl mx-auto space-y-16 pb-20 text-lg text-gray-300 leading-relaxed">
+
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight text-white mb-6">1. The Challenge.</h2>
+                <p class="mb-4">
+                    Industrial metal chains — in conveyors, hoists, and heavy machinery — take continuous stress, load, and wear. Surface cracks form quietly, and manual visual inspection is still the default line of defense.
+                </p>
+                <p>
+                    That default is slow, inconsistent under fatigue, and often misses small or early-stage cracks entirely — especially on chains moving at production speed. Left undetected, a single crack can mean equipment failure, safety risk, or costly downtime.
+                </p>
             </div>
-            <p class="text-lg">This sketch delineates the spatial constraints of the system. The enclosure is constructed from a rigid aluminum-cardboard composite, which acts as a Faraday cage of sorts, minimizing external EMI (Electro-Magnetic Interference) and ensuring consistent, diffused lighting—a non-negotiable requirement for accurate edge detection. The laptop serves as the central processing unit, running the YOLOv8 inference engine. By placing the Arducam within a fixed-geometry housing, we establish a constant focal distance, meaning the model does not need to handle varying object distances, thus significantly improving the mean Average Precision (mAP) during the inference phase[cite: 396].</p>
+
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight text-white mb-6">2. Engineering Architecture &amp; Hardware Components.</h2>
+                <p class="mb-4">The proposed system is an integrated mechatronic solution designed for autonomous industrial inspection. At the physical layer, the conveyor is powered by a high-torque <strong class="text-white">Micro DC Geared Motor</strong>, selected for its ability to maintain constant linear velocity so the camera's frame rate stays synchronized with material throughput.</p>
+                <p class="mb-4">Speed is governed by a <strong class="text-white">PWM Controller</strong>, regulating velocity without losing the torque needed to pull the interlocked chain — preventing slippage or jerkiness that would introduce motion blur into the image stream.</p>
+                <p>Power is stabilized via a <strong class="text-white">12V AC-DC SMPS</strong>, using high-frequency switching for efficiency while keeping a clean DC rail for the motor drivers and LED lighting, free of electrical noise that could degrade the camera feed.</p>
+
+                <div class="grid grid-cols-2 gap-6 mt-8">
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10"><img src="assets/camera.jpeg" class="rounded-xl"><p class="mt-4 font-bold text-sm text-white">Arducam Module: optical acquisition unit for high-fidelity frame extraction via UVC.</p></div>
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10"><img src="assets/motor.jpeg" class="rounded-xl"><p class="mt-4 font-bold text-sm text-white">DC Geared Motor: regulated motion for chain transport through the inspection gate.</p></div>
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10"><img src="assets/regulat.jpeg" class="rounded-xl"><p class="mt-4 font-bold text-sm text-white">PWM Controller: duty-cycle speed regulation without losing torque.</p></div>
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10"><img src="assets/converter.jpeg" class="rounded-xl"><p class="mt-4 font-bold text-sm text-white">12V AC-DC SMPS: a clean, noise-free power rail for the whole rig.</p></div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight text-white mb-6">3. System Concept &amp; Logic Sketch.</h2>
+                <div class="w-1/2 float-left mr-8 mb-4">
+                    <img src="assets/project-sketch.jpeg" class="rounded-2xl border border-white/10">
+                </div>
+                <p class="text-lg">This sketch delineates the spatial constraints of the system. The enclosure is a rigid aluminium-and-cardboard composite, minimizing external interference and keeping lighting consistent and diffused — non-negotiable for accurate edge detection. The laptop is the central processing unit, running the YOLOv8 inference engine. Housing the Arducam at a fixed geometry keeps the focal distance constant, so the model never has to handle varying object distance, improving detection precision.</p>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight text-white mb-6">4. Detection Pipeline.</h2>
+                <p class="mb-4">Every frame moves through the same six stages before a verdict is logged:</p>
+                <ul class="list-disc list-inside space-y-3 mt-4 text-gray-400 marker:text-white">
+                    <li><strong class="text-white">Acquisition:</strong> the Arducam captures live frames under LED ring lighting as the chain moves.</li>
+                    <li><strong class="text-white">Region of interest:</strong> background and belt are cropped out, isolating the chain.</li>
+                    <li><strong class="text-white">Preprocessing:</strong> grayscale conversion plus Gaussian blur to cut noise.</li>
+                    <li><strong class="text-white">Edge detection:</strong> Canny edge detection exposes the chain's structural boundaries.</li>
+                    <li><strong class="text-white">Classification:</strong> YOLOv8-Nano scores irregular patterns against a 0.15 confidence threshold.</li>
+                    <li><strong class="text-white">Output:</strong> a bounding-box overlay, a voice alert, and a CSV log entry — pass or fail.</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight text-white mb-6">5. System Architecture &amp; Flowchart Deep-Dive.</h2>
+                <img src="assets/block-diagram.png" class="w-full rounded-2xl border border-white/10 mb-8">
+                <p class="mb-8">The system is logically partitioned into three functional domains. The <strong class="text-white">Data Acquisition Tier</strong> is the physical sensory layer, turning mechanical movement into digital signal. The <strong class="text-white">Processing Unit</strong> is the algorithmic core, where Python 3.11 manages the inference lifecycle. The <strong class="text-white">Output Interface</strong> interprets the binary result — "Safe" vs "Defective" — and triggers the mechanical or acoustic response.</p>
+
+                <img src="assets/flowchart.png" class="w-full rounded-2xl border border-white/10 mb-8">
+                <p>The flowchart depicts the conditional state-machine logic. It starts with initial calibration — loading the <code class="bg-white/10 px-1.5 py-0.5 rounded text-sm">.pt</code> weights. The scan loop is interrupt-driven: once model confidence exceeds the 0.15 threshold, the global <code class="bg-white/10 px-1.5 py-0.5 rounded text-sm">chain_is_safe</code> flag flips false and the buzzer output latches. Every detection is logged to CSV for archival verification.</p>
+            </div>
+
+            <div class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10">
+                <h2 class="text-2xl font-bold tracking-tight text-white mb-4">6. Software &amp; Tooling.</h2>
+                <p class="text-gray-400 text-base mb-4">The full pipeline runs on Python 3.11 in PyCharm — no dedicated firmware, no microcontroller. Everything from frame capture to voice alert is one software stack.</p>
+                <ul class="list-disc list-inside space-y-2 text-gray-400 marker:text-white text-base">
+                    <li><strong class="text-white">Ultralytics YOLOv8-Nano</strong> — inference engine</li>
+                    <li><strong class="text-white">OpenCV</strong> — capture, preprocessing, bounding-box overlay</li>
+                    <li><strong class="text-white">Roboflow</strong> — dataset annotation and versioning</li>
+                    <li><strong class="text-white">pyttsx3</strong> — offline voice alerts</li>
+                    <li><strong class="text-white">CSV + datetime</strong> — inspection logging</li>
+                </ul>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight text-white mb-6">7. Dataset &amp; Training.</h2>
+                <p class="mb-8">56 chain images, annotated and versioned in Roboflow, trained the YOLOv8-Nano model to tell cracked links from clean ones.</p>
+                <img src="assets/database.png" class="w-full rounded-2xl border border-white/10">
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold tracking-tight text-white mb-6">8. Results.</h2>
+                <p class="mb-8">Every run is timestamped and logged automatically — no manual record-keeping. Below: a live detection catching two defects mid-scan, and the resulting log.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/10"><img src="assets/live-detection-warning.jpeg" class="rounded-xl"><p class="mt-4 font-bold text-sm text-white">Live scan flagging a defect on-screen.</p></div>
+                    <div class="bg-white/5 p-4 rounded-2xl border border-white/10"><img src="assets/log-file.png" class="rounded-xl"><p class="mt-4 font-bold text-sm text-white">Auto-generated inspection log — date, time, crack count, PASS/FAIL.</p></div>
+                </div>
+            </div>
+
+            <div class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10">
+                <h2 class="text-2xl font-bold tracking-tight text-white mb-4">9. Bill of Materials.</h2>
+                <div class="space-y-3 text-base">
+                    <div class="flex justify-between border-b border-white/10 pb-3"><span class="text-gray-400">Industrial camera</span><span class="font-medium text-white">₹5,000</span></div>
+                    <div class="flex justify-between border-b border-white/10 pb-3"><span class="text-gray-400">Frame &amp; mounting structure</span><span class="font-medium text-white">₹300</span></div>
+                    <div class="flex justify-between border-b border-white/10 pb-3"><span class="text-gray-400">Stepper motor</span><span class="font-medium text-white">₹250</span></div>
+                    <div class="flex justify-between border-b border-white/10 pb-3"><span class="text-gray-400">PWM controller</span><span class="font-medium text-white">₹180</span></div>
+                    <div class="flex justify-between border-b border-white/10 pb-3"><span class="text-gray-400">AC-DC 12V converter</span><span class="font-medium text-white">₹150</span></div>
+                    <div class="flex justify-between border-b border-white/10 pb-3"><span class="text-gray-400">Lighting system</span><span class="font-medium text-white">₹100</span></div>
+                    <div class="flex justify-between border-b border-white/10 pb-3"><span class="text-gray-400">Conveyor belt</span><span class="font-medium text-white">₹100</span></div>
+                    <div class="flex justify-between border-b border-white/10 pb-3"><span class="text-gray-400">Cables &amp; connectors</span><span class="font-medium text-white">₹100</span></div>
+                    <div class="flex justify-between pt-2"><span class="text-white font-bold">Total</span><span class="font-black text-[#8b9aff] text-xl">₹6,180</span></div>
+                </div>
+            </div>
+
+        </main>
+
+        <section class="px-6 md:px-12 max-w-5xl mx-auto pb-32">
+            <h2 class="text-3xl font-bold tracking-tight text-white mb-6">Build Gallery.</h2>
+            <p class="mb-10 text-gray-400 text-lg leading-relaxed">From workbench to working rig to the project showcase floor.</p>
+
+            <div class="space-y-16">
+
+                <figure class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shrink-0">
+                        <img src="assets/build-workbench.jpeg" alt="Two team members assembling the conveyor roller frame" class="w-full h-auto">
+                    </div>
+                    <figcaption class="w-full md:w-1/2 text-gray-400 text-lg leading-relaxed">
+                        <span class="text-white font-semibold block mb-2 text-xl">Assembling the frame.</span> Cutting and mounting the roller housing that the conveyor belt and bearings would sit in — the physical structure everything else got wired into.
+                    </figcaption>
+                </figure>
+
+                <figure class="flex flex-col md:flex-row-reverse items-center gap-8">
+                    <div class="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shrink-0">
+                        <img src="assets/rig-overhead.jpeg" alt="Overhead view of the finished conveyor rig with camera and lighting" class="w-full h-auto">
+                    </div>
+                    <figcaption class="w-full md:w-1/2 text-gray-400 text-lg leading-relaxed">
+                        <span class="text-white font-semibold block mb-2 text-xl">The finished rig.</span> Camera centered over the belt, LED lighting alongside, motor driver and SMPS wired in below — everything the inspection loop needs, built onto one base.
+                    </figcaption>
+                </figure>
+
+                <figure class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-full md:w-1/2 rounded-3xl overflow-hidden border border-white/10 shrink-0">
+                        <img src="assets/team-showcase.jpeg" alt="Project team presenting the working prototype at the SJCET project showcase" class="w-full h-auto">
+                    </div>
+                    <figcaption class="w-full md:w-1/2 text-gray-400 text-lg leading-relaxed">
+                        <span class="text-white font-semibold block mb-2 text-xl">Showcase day.</span> Presenting the finished prototype alongside the team — Aayushi Michael, Dominic George, and Yadukrishna Hari — at the SJCET project showcase.
+                    </figcaption>
+                </figure>
+
+            </div>
         </section>
 
-        <section class="space-y-6">
-            <h2 class="text-3xl font-bold text-white">3. System Architecture & Flowchart Deep-Dive</h2>
-            <img src="assets/block-diagram.png" class="w-full rounded-2xl border border-white/10 mb-8">
-            <p>The system is logically partitioned into three functional domains. The <strong>Data Acquisition Tier</strong> operates as the physical sensory layer, transforming mechanical movements into digital signals. The <strong>Processing Unit</strong> functions as the algorithmic core, where Python 3.11 manages the inference lifecycle. The <strong>Output Interface</strong> acts as the execution layer—it interprets the binary results ("Safe" vs "Defective") and triggers mechanical or acoustic response modules.</p>
-            
-            <img src="assets/flowchart.png" class="w-full rounded-2xl border border-white/10 mb-8">
-            <p>The flowchart depicts the conditional state machine logic. It begins with the initial calibration (loading the .pt weights). The scan loop is an interrupt-driven process; should the model confidence exceed the 0.15 threshold, the global variable <code>chain_is_safe</code> is toggled to false, and the buzzer output is latched. This state-machine design ensures the system handles errors gracefully, maintaining a log of all detections in a CSV file for archival verification[cite: 588].</p>
-        </section>
+        <footer class="py-12 border-t border-white/20 text-center text-sm text-gray-400">
+            <p>Copyright 2026. Alan Jibin. All rights reserved.</p>
+        </footer>
 
-    </main>
+    </div>
 
     <script>
         const cursorDot = document.querySelector("[data-cursor-dot]");
